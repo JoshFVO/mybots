@@ -13,12 +13,12 @@ class SIMULATION:
         self.robot = ROBOT()
 
     def RUN(self):
-        for t in range(1000):
+        for t in range(100):
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.Act(t)
-            time.sleep(1/60)
+            time.sleep(1/300)
             #print(t)
 
     def __del__(self):
