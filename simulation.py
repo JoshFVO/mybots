@@ -7,9 +7,13 @@ from robot import ROBOT
 
 class SIMULATION:
 
-    def __init__(self, mode):
-        
-        self.world = WORLD(mode)
+    def __init__(self, directOrGUI):
+        self.directOrGUI = directOrGUI
+        if directOrGUI == "DIRECT":
+            self.passphysicsClient = p.connect(p.DIRECT)
+        else:
+            self.passphysicsClient = p.connect(p.GUI)
+        self.world = WORLD(directOrGUI)
         self.robot = ROBOT()
 
     def RUN(self):
@@ -18,8 +22,8 @@ class SIMULATION:
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.Act(t)
-            time.sleep(1/300)
-            #print(t)
+            if self.directOrGUI == "GUI":
+                time.sleep(1/300)
 
     def Get_Fitness(self):
         self.robot.Get_Fitness()

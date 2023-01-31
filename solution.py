@@ -23,11 +23,11 @@ class SOLUTION:
             self.weights.append(row)
 
     
-    def Evaluate(self):
+    def Evaluate(self, mode):
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("python3 simulate.py")
+        os.system("python3 simulate.py " + mode)
         f = open("fitness.txt", "r")
         self.fitness = float(f.read())
         f.close()
