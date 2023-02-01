@@ -7,14 +7,14 @@ from robot import ROBOT
 
 class SIMULATION:
 
-    def __init__(self, directOrGUI):
+    def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
         if directOrGUI == "DIRECT":
             self.passphysicsClient = p.connect(p.DIRECT)
         else:
             self.passphysicsClient = p.connect(p.GUI)
         self.world = WORLD(directOrGUI)
-        self.robot = ROBOT()
+        self.robot = ROBOT(solutionID)
 
     def RUN(self):
         for t in range(250):

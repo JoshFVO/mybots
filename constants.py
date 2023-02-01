@@ -8,3 +8,4 @@ frequencyFl = 10.0
 phaseOffsetFl = 0
 
 numberOfGenerations = 10
+populationSize = 2
