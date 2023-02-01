@@ -2,13 +2,14 @@ import numpy
 import pyrosim.pyrosim as pyrosim
 import os
 import random
+import time
 
 length = 1
 width = 1
 height = 1
 x = 0
 y = 0
-z = 0.5
+z = 0.5 
 
 class SOLUTION:
 
@@ -28,10 +29,26 @@ class SOLUTION:
         self.Create_World()
         self.Create_Body()
         self.Create_Brain()
-        os.system("start /B python3 simulate.py " + directOrGUI )
-        f = open("fitness.txt", "r")
+        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.01)
+        f = open("fitness" + str(self.myID) + ".txt", "r")
         self.fitness = float(f.read())
         f.close()
+
+    def Start_Simulation(self, directOrGUI):
+        self.Create_World()
+        self.Create_Body()
+        self.Create_Brain()
+        os.system("python3 simulate.py " + directOrGUI + " " + str(self.myID) + " &")
+
+    def Wait_For_Simulation_To_End(self):
+        while not os.path.exists("fitness" + str(self.myID) + ".txt"):
+            time.sleep(0.01)
+        f = open("fitness" + str(self.myID) + ".txt", "r")
+        self.fitness = float(f.read())
+        f.close()
+        os.system("rm fitness" + str(self.myID) + ".txt")
 
     def Create_World(self):
         pyrosim.Start_SDF("world.sdf")

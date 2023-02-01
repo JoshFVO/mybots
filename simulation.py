@@ -9,6 +9,7 @@ class SIMULATION:
 
     def __init__(self, directOrGUI, solutionID):
         self.directOrGUI = directOrGUI
+        self.solutionID = solutionID
         if directOrGUI == "DIRECT":
             self.passphysicsClient = p.connect(p.DIRECT)
         else:
@@ -17,7 +18,7 @@ class SIMULATION:
         self.robot = ROBOT(solutionID)
 
     def RUN(self):
-        for t in range(250):
+        for t in range(500):
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
@@ -26,7 +27,7 @@ class SIMULATION:
                 time.sleep(1/300)
 
     def Get_Fitness(self):
-        self.robot.Get_Fitness()
+        self.robot.Get_Fitness(self.solutionID)
 
     def __del__(self):
         p.disconnect()
