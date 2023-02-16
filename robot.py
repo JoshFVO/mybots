@@ -11,7 +11,7 @@ class ROBOT:
     def __init__(self, solutionID):
         self.robotId = p.loadURDF("body.urdf")
         self.nn = NEURAL_NETWORK("brain" + str(solutionID) + ".nndf")
-        os.system("rm brain" + str(solutionID) + ".nndf")
+        os.system("del brain" + str(solutionID) + ".nndf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
@@ -52,5 +52,5 @@ class ROBOT:
         f = open("tmp" + str(solutionID) + ".txt", "w")
         f.write(str(xPosition))
         f.close()
-        os.system("mv tmp" + str(solutionID) + ".txt fitness" + str(solutionID) + ".txt")
+        os.system("rename tmp" + str(solutionID) + ".txt fitness" + str(solutionID) + ".txt")
         exit()
